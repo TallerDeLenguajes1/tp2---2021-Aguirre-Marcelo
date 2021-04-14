@@ -1,0 +1,9 @@
+¿Puede ver el archivo tp2_1_2.cpp? ¿Por qué?
+
+NO, no se lo puede  ver , porque se guardo en una rama diferente. El esplorador de archivos te muestra 
+en la rama actual en la que se esta trabajando.
+
+¿Qué nota?
+
+combina en el master los dos repositorio (el master y Opcion_2).
+copia los archivos de Opcion_2 y lo pone en el master.
