@@ -16,6 +16,7 @@ void cargar(compu *);
 void cargarArreglo(compu *, int);
 void pcMasVieja(compu *, int);
 void pcMasVelos(compu *, int);
+void copiarPc(compu *, compu );
 
 int main()
 {
@@ -83,51 +84,59 @@ void mostrarArreglo(compu *puntero, int cantidad)
     }
 }
 
-void pcMasVieja(compu *puntero, int cantidad)
+void pcMasVieja(compu *listado, int cantidad)
 {
 
-    int aux = puntero->anio;
-    printf("\n--------------------");
+    compu miPcVieja;
+
+    copiarPc(&miPcVieja, listado[0] );
+
     for (int i = 0; i < cantidad; i++)
     {
-        if (puntero->anio < aux)
+        if (miPcVieja.anio > listado[i].anio)
         {
 
-            aux = puntero->anio;
-        }
-        puntero++;
+            copiarPc(&miPcVieja, listado[i] );
+        }      
     }
-    printf("\nPc mas vieja: %d", aux);
+    
+    printf("\n--------------------");
+    printf("\nPc mas vieja:\n");
+    printf("Nombre: %s\n", miPcVieja.nombre);
+    printf("Velocidad: %d Ghez \n", miPcVieja.velocidad);
+    printf("Anio: %d <-----\n", miPcVieja.anio);
+    printf("Cantidad de nucleos: %d\n", miPcVieja.cantidad);
 }
 
-void pcMasVelos(compu *puntero, int cantidad)
+void pcMasVelos(compu *listado, int cantidad)
 {
 
-    int aux, aux2, aux3, i;
-    char aux1[10];
+    compu miPc;
 
-    aux = puntero->velocidad;
+    copiarPc(&miPc, listado[0] );
 
-    for ( i = 0; i < cantidad; i++)
+    for (int i = 0; i < cantidad; i++)
     {
-        if (aux < puntero->velocidad)
+        if (miPc.velocidad < listado[i].velocidad)
         {
-            aux = puntero->velocidad;
-            for ( i = 0; i < 10; i++)
-            {
-                aux1[i] = puntero->nombre[i];
-            }
-            aux2 = puntero->cantidad;
-            aux3 = puntero->anio;
-        }
-        puntero++;
+
+            copiarPc(&miPc, listado[i] );
+        }      
     }
+    
     printf("\n--------------------");
     printf("\nPc mas veloz:\n");
-    printf("Nombre: %s\n", aux1);
-    printf("Velocidad: %d Ghez <-----\n", aux);
-    printf("Anio: %d\n", aux3);
-    printf("Cantidad de nucleos: %d\n", aux2);
+    printf("Nombre: %s\n", miPc.nombre);
+    printf("Velocidad: %d Ghez <-----\n", miPc.velocidad);
+    printf("Anio: %d\n", miPc.anio);
+    printf("Cantidad de nucleos: %d\n", miPc.cantidad);
+}
 
-    
+void copiarPc(compu *miPc, compu listado )
+{
+
+    miPc->velocidad = listado.velocidad;
+    miPc->anio  = listado.anio;
+    miPc->cantidad = listado.cantidad;    
+    strcpy(miPc->nombre, listado.nombre);
 }
